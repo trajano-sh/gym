@@ -50,7 +50,7 @@ CREATE TABLE enrollments
     student_id      BIGINT      NOT NULL REFERENCES students (id),
     enrollment_date DATE        NOT NULL DEFAULT CURRENT_DATE,
     day_maturity    DATE,
-    status          VARCHAR(20) NOT NULL DEFAULT 'active',
+    status          VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
     CHECK (status IN ('ACTIVE', 'CLOSED', 'CANCELED'))
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE enrollments_modalities
     plan_id       BIGINT NOT NULL REFERENCES plans (id),
     start_date    DATE   NOT NULL DEFAULT CURRENT_DATE,
     end_date      DATE,
-    UNIQUE (enrollments_id, graduation_id)
+    UNIQUE (enrollment_id, graduation_id)
 );
 
 CREATE TABLE enrollment_invoices

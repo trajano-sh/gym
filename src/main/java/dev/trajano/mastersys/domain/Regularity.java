@@ -5,23 +5,28 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-@Table(name = "graduations",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"modality_id", "name"}))
+import java.time.LocalDateTime;
+
+@Table(name = "regularity")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Graduations {
+public class Regularity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "modality_id", nullable = false)
-    private Modalities modalityId;
+    @JoinColumn(name = "enrollment_id", nullable = false)
+    private Enrollments enrollmentsId;
 
-    @Column(length = 100, nullable = false)
-    private String name;
+    @Column(nullable = false)
+    @CreationTimestamp
+    private LocalDateTime entryDate;
+
+    private LocalDateTime exitDate;
 }

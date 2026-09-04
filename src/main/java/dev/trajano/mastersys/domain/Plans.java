@@ -8,7 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Table(name = "plans")
+@Table(name = "plans",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"modality_id", "name"}))
 @Entity
 @Getter
 @Setter
@@ -20,15 +21,15 @@ public class Plans {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "modality_id", columnDefinition = "id", unique = true)
+    @JoinColumn(name = "modality_id", nullable = false)
     private Modalities modalityId;
 
-    @Column(length = 100, nullable = false, unique = true)
+    @Column(length = 100, nullable = false)
     private String name;
 
     @Column(name = "monthly_amount", nullable = false, precision = 10, scale = 2, columnDefinition = "NUMERIC(10, 2) CHECK (monthly_amount >= 0)")
     private BigDecimal monthlyAmount;
 
     @Column(nullable = false)
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
 }
