@@ -53,27 +53,5 @@ public record StudentsRequestDTO(@NotBlank(message = "Name is required") @Size(m
                                  @NotBlank(message = "Cep is required")
                                  String cep
 
-) {
-    public Students toEntity() {
-        Students st = new Students();
-        lora(st);
-        return st;
-    }
-
-    public void lora(Students students) {
-        students.setName(name);
-        students.setDateOfBirth(dateOfBirth);
-        students.setSex(sex);
-        students.setTelephone(telephone);
-        students.setCellPhone(cellPhone);
-        students.setEmail(email);
-        students.setObservations(observation);
-        students.setAddress(address);
-        students.setCity(city);
-        students.setNumber(number);
-        students.setComplements(complement);
-        students.setNeighborhood(neighborhood);
-        students.setState(state);
-        students.setCep(cep);
-    }
+){
 }
