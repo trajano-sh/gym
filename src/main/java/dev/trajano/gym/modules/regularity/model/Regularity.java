@@ -25,7 +25,7 @@ public class Regularity {
     @JoinColumn(name = "enrollment_id", nullable = false)
     private Enrollments enrollmentsId;
 
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private LocalDateTime entryDate;
 

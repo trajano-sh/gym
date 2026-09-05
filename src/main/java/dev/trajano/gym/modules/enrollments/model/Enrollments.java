@@ -34,6 +34,4 @@ public class Enrollments {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EnrollmentsEnum status = EnrollmentsEnum.ACTIVE;
-
-
 }
