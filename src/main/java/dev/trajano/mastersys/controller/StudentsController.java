@@ -1,8 +1,10 @@
 package dev.trajano.mastersys.controller;
 
+import dev.trajano.mastersys.dto.StudentsFilterRequestDTO;
 import dev.trajano.mastersys.dto.StudentsRequestDTO;
 import dev.trajano.mastersys.dto.StudentsResponseDTO;
 import dev.trajano.mastersys.service.StudentsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +19,13 @@ public class StudentsController {
     private final StudentsService studentsService;
 
     @PostMapping
-    public ResponseEntity<StudentsResponseDTO> register(@RequestBody StudentsRequestDTO requestDTO) {
+    public ResponseEntity<StudentsResponseDTO> register(@RequestBody @Valid StudentsRequestDTO requestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentsService.register(requestDTO));
     }
 
     @GetMapping
-    public ResponseEntity<Page<StudentsResponseDTO>> list(Pageable pageable) {
-        return ResponseEntity.ok(studentsService.listStudents(pageable));
+    public ResponseEntity<Page<StudentsResponseDTO>> list(StudentsFilterRequestDTO filter, Pageable pageable) {
+        return ResponseEntity.ok(studentsService.listStudents(filter,pageable));
     }
 
     @GetMapping("/{studentsId}")
@@ -32,7 +34,7 @@ public class StudentsController {
     }
 
     @PutMapping("/{studentsId}")
-    public ResponseEntity<StudentsResponseDTO> update(@PathVariable Long studentsId, @RequestBody StudentsRequestDTO requestDTO) {
+    public ResponseEntity<StudentsResponseDTO> update(@PathVariable Long studentsId, @RequestBody @Valid StudentsRequestDTO requestDTO) {
         return ResponseEntity.ok(studentsService.update(studentsId, requestDTO));
     }
 

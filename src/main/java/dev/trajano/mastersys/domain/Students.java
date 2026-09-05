@@ -23,21 +23,24 @@ public class Students {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 150,name = "name")
     private String name;
 
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(name = "sex")
     @Enumerated(EnumType.STRING)
     private SexEnum sex;
 
-    @Column(length = 30)
+
+    @Column(length = 30,name = "telephone")
     private String telephone;
 
     @Column(length = 30)
     private String cellPhone;
 
-    @Column(length = 150)
+    @Column(length = 150,unique = true)
     private String email;
 
     private String observations;
