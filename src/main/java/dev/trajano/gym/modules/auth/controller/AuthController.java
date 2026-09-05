@@ -19,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody AuthRegisterRequestDTO requestDTO) throws BadRequestException {
+    public ResponseEntity<Void> register(@RequestBody AuthRegisterRequestDTO requestDTO) {
         authService.register(requestDTO);
         return ResponseEntity.noContent().build();
     }

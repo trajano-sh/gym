@@ -1,5 +1,6 @@
 package dev.trajano.gym.modules.auth.service;
 
+import dev.trajano.gym.core.exception.AlreadyExistsException;
 import dev.trajano.gym.core.security.TokenProvider;
 import dev.trajano.gym.modules.auth.dto.AuthLoginRequestDTO;
 import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,15 +31,17 @@ public class AuthService {
     @Value("${jwt.expiration}")
     private long expirationTime;
 
-    public void register(AuthRegisterRequestDTO dto) throws BadRequestException {
+    @Transactional
+    public void register(AuthRegisterRequestDTO dto) {
         if (userRepository.findByUsername(dto.username())
-                .isPresent()) throw new BadRequestException("Username already exists");
+                .isPresent()) throw new AlreadyExistsException("Username already exists");
 
         User user = authMapper.toEntity(dto);
         user.setPassword(passwordEncoder.encode(dto.password()));
         userRepository.save(user);
     }
 
+    @Transactional
     public TokenResponseDTO login(AuthLoginRequestDTO dto) {
         try {
             Authentication authentication = authenticationManager

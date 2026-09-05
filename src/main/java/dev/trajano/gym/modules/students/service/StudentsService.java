@@ -1,5 +1,6 @@
 package dev.trajano.gym.modules.students.service;
 
+import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.students.dto.StudentsFilterRequestDTO;
 import dev.trajano.gym.modules.students.dto.StudentsRequestDTO;
 import dev.trajano.gym.modules.students.dto.StudentsResponseDTO;
@@ -32,8 +33,10 @@ public class StudentsService {
     }
 
     @Transactional(readOnly = true)
-    public Page<StudentsResponseDTO> listStudents(StudentsFilterRequestDTO filter, Pageable pageable) {
-        return studentsRepository.findAll(StudentsSpecification.filters(filter), pageable).map(studentsMapper::fromEntity);
+    public PageResponse<StudentsResponseDTO> listStudents(StudentsFilterRequestDTO filter, Pageable pageable) {
+        Page<Students> students = studentsRepository.findAll(StudentsSpecification.filters(filter), pageable);
+        Page<StudentsResponseDTO> studentsResponseDTOS = students.map(studentsMapper::fromEntity);
+        return PageResponse.fromPage(studentsResponseDTOS);
     }
 
 
@@ -57,7 +60,7 @@ public class StudentsService {
         studentsRepository.delete(students);
     }
 
-    private Students findById(Long idStudents) {
+    public Students findById(Long idStudents) {
         return studentsRepository.findById(idStudents).orElseThrow(() -> new NotFoundException("Students Not Found."));
     }
 

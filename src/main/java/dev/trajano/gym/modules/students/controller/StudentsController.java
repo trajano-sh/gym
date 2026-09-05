@@ -1,5 +1,6 @@
 package dev.trajano.gym.modules.students.controller;
 
+import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.students.service.StudentsService;
 import dev.trajano.gym.modules.students.dto.StudentsFilterRequestDTO;
 import dev.trajano.gym.modules.students.dto.StudentsRequestDTO;
@@ -24,7 +25,7 @@ public class StudentsController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<StudentsResponseDTO>> list(StudentsFilterRequestDTO filter, Pageable pageable) {
+    public ResponseEntity<PageResponse<StudentsResponseDTO>> list(StudentsFilterRequestDTO filter, Pageable pageable) {
         return ResponseEntity.ok(studentsService.listStudents(filter,pageable));
     }
 

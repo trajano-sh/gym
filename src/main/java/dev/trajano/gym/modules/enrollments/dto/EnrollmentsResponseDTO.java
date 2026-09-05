@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public record EnrollmentsResponseDTO(
         Long id,
-        Long studentId,
+        Long studentsId,
         LocalDate enrollmentDate,
         LocalDate dayMaturity,
         EnrollmentsEnum status
