@@ -10,3 +10,7 @@ spring:
   flyway:
     enabled: true
     validate-migration-naming: true
+
+jwt:
+  key: ${JWT_KEY}
+  expiration: ${EXPIRATION_TOKEN}

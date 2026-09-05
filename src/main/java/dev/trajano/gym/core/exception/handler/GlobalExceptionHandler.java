@@ -2,6 +2,7 @@ package dev.trajano.gym.core.exception.handler;
 
 import dev.trajano.gym.core.exception.AlreadyExistsException;
 import dev.trajano.gym.core.exception.BusinessException;
+import dev.trajano.gym.core.exception.InvalidTokenException;
 import dev.trajano.gym.core.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,11 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.BAD_REQUEST, "Business Error", resolveMessage(ex.getMessage()));
     }
 
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {
+        return build(HttpStatus.UNAUTHORIZED, "Unauthorized", resolveMessage(ex.getMessage()));
+    }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex) {
         return build(HttpStatus.NOT_FOUND, "Not Found", resolveMessage(ex.getMessage()));
@@ -36,20 +42,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> error.getField() + ": " + (error.getDefaultMessage() != null ? error.getDefaultMessage() : "Invalid value"))
-                .toList();
+        List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getField() + ": " + (error.getDefaultMessage() != null ? error.getDefaultMessage() : "Invalid value")).toList();
         return build(HttpStatus.BAD_REQUEST, "Validation Error", errors);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
         log.error("Unhandled exception caught by GlobalExceptionHandler: ", ex);
-        return build(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                "Internal Server Error",
-                List.of("An unexpected internal error occurred. Please contact support.")
-        );
+        return build(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", List.of("An unexpected internal error occurred. Please contact support."));
     }
 
     private List<String> resolveMessage(String message) {
