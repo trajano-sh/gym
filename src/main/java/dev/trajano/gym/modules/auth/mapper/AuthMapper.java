@@ -1,17 +1,24 @@
 package dev.trajano.gym.modules.auth.mapper;
 
 import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
+import dev.trajano.gym.modules.auth.dto.TokenResponseDTO;
 import dev.trajano.gym.modules.user.model.Role;
 import dev.trajano.gym.modules.user.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 @Component
 public class AuthMapper {
-    public User toEntity(AuthRegisterRequestDTO dto){
+    public User toEntity(AuthRegisterRequestDTO dto) {
         User user = new User();
         user.setRole(Role.BASIC);
-        user.set
+        user.setUsername(dto.username());
+        return user;
+    }
+
+    public TokenResponseDTO toResponse(String token,
+                                       String typeToken,
+                                       Long expiration
+    ) {
+        return new TokenResponseDTO(token, typeToken, expiration);
     }
 }
