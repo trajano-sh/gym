@@ -24,7 +24,7 @@ public class EnrollmentsService {
     private final StudentsService studentsService;
 
     @Transactional
-    public EnrollmentsResponseDTO register(EnrollmentsRequestDTO requestDTO) {
+    public EnrollmentsResponseDTO createEnrollment(EnrollmentsRequestDTO requestDTO) {
         Students students = studentsService.findById(requestDTO.studentId());
         Enrollments enrollments = enrollmentsMapper.toEntity(students, requestDTO);
         enrollmentsRepository.save(enrollments);
@@ -32,20 +32,20 @@ public class EnrollmentsService {
     }
 
     @Transactional(readOnly = true)
-    public EnrollmentsResponseDTO findEnrollmentsById(Long enrollmentsId) {
+    public EnrollmentsResponseDTO searchEnrollmentById(Long enrollmentsId) {
         Enrollments enrollments = findById(enrollmentsId);
         return enrollmentsMapper.fromEntity(enrollments);
     }
 
     @Transactional(readOnly = true)
-    public PageResponse<EnrollmentsResponseDTO> list(Pageable pageable){
+    public PageResponse<EnrollmentsResponseDTO> listEnrollments(Pageable pageable){
         Page<Enrollments> enrollments = enrollmentsRepository.findAll(pageable);
         Page<EnrollmentsResponseDTO> enrollmentsResponseDTOS = enrollments.map(enrollmentsMapper::fromEntity);
         return PageResponse.fromPage(enrollmentsResponseDTOS);
     }
 
     @Transactional
-    public void delete(Long enrollmentsId) {
+    public void deleteEnrollment(Long enrollmentsId) {
         Enrollments enrollments = findById(enrollmentsId);
         enrollmentsRepository.delete(enrollments);
     }

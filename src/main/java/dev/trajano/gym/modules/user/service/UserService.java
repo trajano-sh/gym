@@ -24,7 +24,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Page<UserResponseDTO> list(Pageable pageable) {
+    public Page<UserResponseDTO> listUsers(Pageable pageable) {
         Page<User> users = userRepository.findAll(pageable);
         return users.map(userMapper::fromEntity);
     }

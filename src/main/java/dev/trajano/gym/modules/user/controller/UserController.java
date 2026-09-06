@@ -16,13 +16,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponseDTO> findUser(@PathVariable Long userId) {
+    public ResponseEntity<UserResponseDTO> findUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.findUserById(userId));
     }
 
     @GetMapping
     public ResponseEntity<Page<UserResponseDTO>> listUsers(@PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(userService.list(pageable));
+        return ResponseEntity.ok(userService.listUsers(pageable));
     }
 
     @DeleteMapping("/{userId}")
