@@ -1,4 +1,4 @@
-CREATE TABLE students
+CREATE TABLE student
 (
     id            BIGSERIAL PRIMARY KEY,
     name          VARCHAR(150) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE graduations
     UNIQUE (modality_id, name)
 );
 
-CREATE TABLE plans
+CREATE TABLE plan
 (
     id             BIGSERIAL PRIMARY KEY,
     modality_id    BIGINT         NOT NULL REFERENCES modalities (id),
@@ -47,7 +47,7 @@ CREATE TABLE plans
 CREATE TABLE enrollments
 (
     id              BIGSERIAL PRIMARY KEY,
-    student_id      BIGINT      NOT NULL REFERENCES students (id),
+    student_id      BIGINT      NOT NULL REFERENCES student (id),
     enrollment_date DATE        NOT NULL DEFAULT CURRENT_DATE,
     day_maturity    DATE,
     status          VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',
@@ -60,7 +60,7 @@ CREATE TABLE enrollments_modalities
     enrollment_id BIGINT NOT NULL REFERENCES enrollments (id),
     modality_id   BIGINT NOT NULL REFERENCES modalities (id),
     graduation_id BIGINT NOT NULL REFERENCES graduations (id),
-    plan_id       BIGINT NOT NULL REFERENCES plans (id),
+    plan_id       BIGINT NOT NULL REFERENCES plan (id),
     start_date    DATE   NOT NULL DEFAULT CURRENT_DATE,
     end_date      DATE,
     UNIQUE (enrollment_id, graduation_id)

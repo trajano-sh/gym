@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.regularity.domain;
 
-import dev.trajano.gym.modules.enrollments.domain.Enrollments;
+import dev.trajano.gym.modules.enrollment.domain.Enrollment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class Regularity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enrollment_id", nullable = false)
-    private Enrollments enrollmentsId;
+    private Enrollment enrollmentsId;
 
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
