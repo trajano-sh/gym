@@ -1,4 +1,4 @@
-package dev.trajano.gym.modules.modalities.model;
+package dev.trajano.gym.modules.modalities.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

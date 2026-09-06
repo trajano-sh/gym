@@ -8,7 +8,7 @@ import dev.trajano.gym.core.exception.AlreadyExistsException;
 import dev.trajano.gym.core.exception.NotFoundException;
 import dev.trajano.gym.modules.students.mapper.StudentsMapper;
 import dev.trajano.gym.modules.students.specification.StudentsSpecification;
-import dev.trajano.gym.modules.students.model.Students;
+import dev.trajano.gym.modules.students.domain.Students;
 import dev.trajano.gym.modules.students.repository.StudentsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

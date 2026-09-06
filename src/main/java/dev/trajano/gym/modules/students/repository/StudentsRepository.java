@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.students.repository;
 
-import dev.trajano.gym.modules.students.model.Students;
+import dev.trajano.gym.modules.students.domain.Students;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

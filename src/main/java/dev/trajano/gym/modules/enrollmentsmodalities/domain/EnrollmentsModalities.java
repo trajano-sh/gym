@@ -1,9 +1,9 @@
-package dev.trajano.gym.modules.enrollmentsmodalities.model;
+package dev.trajano.gym.modules.enrollmentsmodalities.domain;
 
-import dev.trajano.gym.modules.enrollments.model.Enrollments;
-import dev.trajano.gym.modules.graduations.model.Graduations;
-import dev.trajano.gym.modules.modalities.model.Modalities;
-import dev.trajano.gym.modules.plans.model.Plans;
+import dev.trajano.gym.modules.enrollments.domain.Enrollments;
+import dev.trajano.gym.modules.graduations.domain.Graduations;
+import dev.trajano.gym.modules.modalities.domain.Modalities;
+import dev.trajano.gym.modules.plans.domain.Plans;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

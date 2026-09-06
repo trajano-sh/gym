@@ -2,7 +2,7 @@ package dev.trajano.gym.modules.students.mapper;
 
 import dev.trajano.gym.modules.students.dto.StudentsRequestDTO;
 import dev.trajano.gym.modules.students.dto.StudentsResponseDTO;
-import dev.trajano.gym.modules.students.model.Students;
+import dev.trajano.gym.modules.students.domain.Students;
 import org.springframework.stereotype.Component;
 
 @Component

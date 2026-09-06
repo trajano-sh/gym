@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.enrollmentinvoices.dto;
 
-import dev.trajano.gym.modules.enrollmentinvoices.model.EnrollmentInvoicesEnum;
+import dev.trajano.gym.modules.enrollmentinvoices.domain.EnrollmentInvoicesEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

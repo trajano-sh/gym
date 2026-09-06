@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.students.specification;
 
-import dev.trajano.gym.modules.students.model.Students;
+import dev.trajano.gym.modules.students.domain.Students;
 import dev.trajano.gym.modules.students.dto.StudentsFilterRequestDTO;
 import org.springframework.data.jpa.domain.Specification;
 

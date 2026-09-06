@@ -1,7 +1,6 @@
 package dev.trajano.gym.modules.students.dto;
 
-import dev.trajano.gym.modules.students.model.Students;
-import dev.trajano.gym.modules.students.model.SexEnum;
+import dev.trajano.gym.modules.students.domain.SexEnum;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;

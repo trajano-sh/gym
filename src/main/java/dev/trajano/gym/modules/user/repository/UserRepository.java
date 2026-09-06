@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.user.repository;
 
-import dev.trajano.gym.modules.user.model.User;
+import dev.trajano.gym.modules.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

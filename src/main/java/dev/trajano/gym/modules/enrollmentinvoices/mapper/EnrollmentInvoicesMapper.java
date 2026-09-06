@@ -2,8 +2,8 @@ package dev.trajano.gym.modules.enrollmentinvoices.mapper;
 
 import dev.trajano.gym.modules.enrollmentinvoices.dto.EnrollmentInvoicesRequestDTO;
 import dev.trajano.gym.modules.enrollmentinvoices.dto.EnrollmentInvoicesResponseDTO;
-import dev.trajano.gym.modules.enrollmentinvoices.model.EnrollmentInvoices;
-import dev.trajano.gym.modules.enrollments.model.Enrollments;
+import dev.trajano.gym.modules.enrollmentinvoices.domain.EnrollmentInvoices;
+import dev.trajano.gym.modules.enrollments.domain.Enrollments;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,6 @@
 package dev.trajano.gym.modules.enrollments.dto;
 
-import dev.trajano.gym.modules.enrollments.model.EnrollmentsEnum;
+import dev.trajano.gym.modules.enrollments.domain.EnrollmentsEnum;
 
 import java.time.LocalDate;
 

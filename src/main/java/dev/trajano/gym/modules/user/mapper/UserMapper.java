@@ -2,7 +2,7 @@ package dev.trajano.gym.modules.user.mapper;
 
 import dev.trajano.gym.modules.user.dto.UserRequestDTO;
 import dev.trajano.gym.modules.user.dto.UserResponseDTO;
-import dev.trajano.gym.modules.user.model.User;
+import dev.trajano.gym.modules.user.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,6 @@
-package dev.trajano.gym.modules.enrollmentinvoices.model;
+package dev.trajano.gym.modules.enrollmentinvoices.domain;
 
-import dev.trajano.gym.modules.enrollments.model.Enrollments;
+import dev.trajano.gym.modules.enrollments.domain.Enrollments;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

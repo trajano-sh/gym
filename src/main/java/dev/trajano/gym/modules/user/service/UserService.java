@@ -3,7 +3,7 @@ package dev.trajano.gym.modules.user.service;
 import dev.trajano.gym.core.exception.NotFoundException;
 import dev.trajano.gym.modules.user.dto.UserResponseDTO;
 import dev.trajano.gym.modules.user.mapper.UserMapper;
-import dev.trajano.gym.modules.user.model.User;
+import dev.trajano.gym.modules.user.domain.User;
 import dev.trajano.gym.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

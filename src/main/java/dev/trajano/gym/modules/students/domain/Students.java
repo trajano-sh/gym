@@ -1,4 +1,4 @@
-package dev.trajano.gym.modules.students.model;
+package dev.trajano.gym.modules.students.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

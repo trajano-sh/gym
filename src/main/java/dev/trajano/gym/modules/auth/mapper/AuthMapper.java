@@ -2,8 +2,8 @@ package dev.trajano.gym.modules.auth.mapper;
 
 import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
 import dev.trajano.gym.modules.auth.dto.TokenResponseDTO;
-import dev.trajano.gym.modules.user.model.Role;
-import dev.trajano.gym.modules.user.model.User;
+import dev.trajano.gym.modules.user.domain.Role;
+import dev.trajano.gym.modules.user.domain.User;
 import org.springframework.stereotype.Component;
 
 @Component
