@@ -5,7 +5,6 @@ import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
 import dev.trajano.gym.modules.auth.dto.TokenResponseDTO;
 import dev.trajano.gym.modules.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
