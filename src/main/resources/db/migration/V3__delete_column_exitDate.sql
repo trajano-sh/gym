@@ -1,0 +1,1 @@
+ALTER TABLE regularity DROP COLUMN exit_date;

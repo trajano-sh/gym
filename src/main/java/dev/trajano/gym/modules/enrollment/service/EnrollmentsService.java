@@ -49,7 +49,7 @@ public class EnrollmentsService {
         enrollmentsRepository.delete(enrollments);
     }
 
-    private Enrollment findById(Long enrollmentsId) {
+    public Enrollment findById(Long enrollmentsId) {
         Enrollment enrollments = enrollmentsRepository.findById(enrollmentsId).orElseThrow(() -> new NotFoundException("Enrollments Not Found"));
         return enrollments;
     }

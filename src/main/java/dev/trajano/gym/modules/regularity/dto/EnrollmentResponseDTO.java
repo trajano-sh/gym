@@ -2,9 +2,11 @@ package dev.trajano.gym.modules.regularity.dto;
 
 import java.time.LocalDateTime;
 
-public record RegularityResponseDTO(
+public record EnrollmentResponseDTO(
+        Integer position,
         Long id,
         String name,
-        LocalDateTime entryDate
+        LocalDateTime createdAt,
+        Integer quantity
 ) {
 }

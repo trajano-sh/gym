@@ -28,6 +28,4 @@ public class Regularity {
     @Column(nullable = false,updatable = false)
     @CreationTimestamp
     private LocalDateTime entryDate;
-
-    private LocalDateTime exitDate;
 }
