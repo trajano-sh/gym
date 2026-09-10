@@ -16,3 +16,14 @@ spring:
 jwt:
   key: ${JWT_KEY}
   expiration: ${EXPIRATION_TOKEN}
+resilience4j:
+  ratelimiter:
+    instances:
+      authRegister:
+        timeout-duration: 0
+        limit-for-period: 5
+        limit-refresh-period: 60s
+      authLogin:
+        timeout-duration: 0
+        limit-for-period: 5
+        limit-refresh-period: 60s

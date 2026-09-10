@@ -30,7 +30,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource){
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource) throws Exception {
         return http
                 .cors(csrf->csrf.configurationSource(corsConfigurationSource))
                 .csrf(csrf-> csrf.disable())
@@ -47,7 +47,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration  config){
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration  config) throws Exception {
         return config.getAuthenticationManager();
     }
 }

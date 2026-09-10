@@ -4,6 +4,7 @@ import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.enrollmentinvoice.dto.EnrollmentInvoiceRequestDTO;
 import dev.trajano.gym.modules.enrollmentinvoice.dto.EnrollmentInvoiceResponseDTO;
 import dev.trajano.gym.modules.enrollmentinvoice.service.EnrollmentInvoiceService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class EnrollmentInvoiceController {
     private final EnrollmentInvoiceService enrollmentInvoiceService;
 
     @PostMapping
-    public ResponseEntity<EnrollmentInvoiceResponseDTO> register(@RequestBody EnrollmentInvoiceRequestDTO requestDTO) {
+    public ResponseEntity<EnrollmentInvoiceResponseDTO> register(@RequestBody @Valid EnrollmentInvoiceRequestDTO requestDTO) {
         return ResponseEntity.ok(enrollmentInvoiceService.createEnrollmentInvoices(requestDTO));
     }
 

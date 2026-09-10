@@ -4,6 +4,7 @@ import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.plan.dto.PlanRequestDTO;
 import dev.trajano.gym.modules.plan.dto.PlanResponseDTO;
 import dev.trajano.gym.modules.plan.service.PlanService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class PlanController {
     }
 
     @PostMapping
-    public ResponseEntity<PlanResponseDTO> register(@RequestBody PlanRequestDTO request) {
+    public ResponseEntity<PlanResponseDTO> register(@RequestBody @Valid PlanRequestDTO request) {
         PlanResponseDTO response = planService.createPlan(request);
         return ResponseEntity.ok(response);
     }

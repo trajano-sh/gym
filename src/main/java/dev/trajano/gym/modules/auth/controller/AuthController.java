@@ -4,6 +4,8 @@ import dev.trajano.gym.modules.auth.dto.AuthLoginRequestDTO;
 import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
 import dev.trajano.gym.modules.auth.dto.TokenResponseDTO;
 import dev.trajano.gym.modules.auth.service.AuthService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +20,15 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody AuthRegisterRequestDTO request) {
+    @RateLimiter(name = "authRegister")
+    public ResponseEntity<Void> register(@RequestBody @Valid AuthRegisterRequestDTO request) {
         authService.register(request);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponseDTO> login(@RequestBody AuthLoginRequestDTO request) {
+    @RateLimiter(name = "authLogin")
+    public ResponseEntity<TokenResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO request) {
         TokenResponseDTO token = authService.login(request);
         return ResponseEntity.ok(token);
     }

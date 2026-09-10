@@ -4,6 +4,7 @@ import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.modality.dto.ModalitiesRequestDTO;
 import dev.trajano.gym.modules.modality.dto.ModalitiesResponseDTO;
 import dev.trajano.gym.modules.modality.service.ModalitiesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ModalitiesController {
     private final ModalitiesService modalitiesService;
 
     @PostMapping
-    public ResponseEntity<ModalitiesResponseDTO> register(@RequestBody ModalitiesRequestDTO request) {
+    public ResponseEntity<ModalitiesResponseDTO> register(@RequestBody @Valid ModalitiesRequestDTO request) {
         ModalitiesResponseDTO response = modalitiesService.createModality(request);
         return ResponseEntity.ok(response);
     }

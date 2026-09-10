@@ -22,7 +22,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 150,name = "name")
+    @Column(nullable = false, length = 150, name = "name")
     private String name;
 
     @Column(name = "date_of_birth")
@@ -32,14 +32,13 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private SexEnum sex;
 
-
-    @Column(length = 30,name = "telephone")
+    @Column(length = 30, name = "telephone")
     private String telephone;
 
     @Column(length = 30)
     private String cellPhone;
 
-    @Column(length = 150,unique = true)
+    @Column(length = 150, unique = true)
     private String email;
 
     private String observations;

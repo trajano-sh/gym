@@ -4,6 +4,7 @@ import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.graduation.dto.GraduationsRequestDTO;
 import dev.trajano.gym.modules.graduation.dto.GraduationsResponseDTO;
 import dev.trajano.gym.modules.graduation.service.GraduationsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class GraduationsController {
     private final GraduationsService graduationsService;
 
     @PostMapping
-    public ResponseEntity<GraduationsResponseDTO> register(@RequestBody GraduationsRequestDTO request) {
+    public ResponseEntity<GraduationsResponseDTO> register(@RequestBody @Valid GraduationsRequestDTO request) {
         GraduationsResponseDTO response = graduationsService.createGraduation(request);
         return ResponseEntity.ok(response);
     }

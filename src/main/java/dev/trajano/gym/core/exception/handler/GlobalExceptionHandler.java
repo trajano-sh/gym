@@ -4,6 +4,7 @@ import dev.trajano.gym.core.exception.AlreadyExistsException;
 import dev.trajano.gym.core.exception.BusinessException;
 import dev.trajano.gym.core.exception.InvalidTokenException;
 import dev.trajano.gym.core.exception.NotFoundException;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {
         return build(HttpStatus.UNAUTHORIZED, "Unauthorized", resolveMessage(ex.getMessage()));
+    }
+    @ExceptionHandler(RequestNotPermitted.class)
+    public ResponseEntity<ErrorResponse> handleRequestNotPermittedException(RequestNotPermitted ex){
+        return build(HttpStatus.TOO_MANY_REQUESTS, "Too Many Requests", resolveMessage("Wait 30 seconds for the next request."));
     }
 
     @ExceptionHandler(NotFoundException.class)
