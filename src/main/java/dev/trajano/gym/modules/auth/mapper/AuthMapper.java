@@ -15,10 +15,7 @@ public class AuthMapper {
         return user;
     }
 
-    public TokenResponseDTO toResponse(String token,
-                                       String typeToken,
-                                       Long expiration
-    ) {
+    public TokenResponseDTO toResponse(String token, String typeToken, Long expiration) {
         return new TokenResponseDTO(token, typeToken, expiration);
     }
 }
