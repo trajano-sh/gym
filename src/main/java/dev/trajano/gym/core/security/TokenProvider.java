@@ -32,7 +32,6 @@ public class TokenProvider {
         return Jwts.builder().subject(username).issuedAt(now).expiration(expirationDate).signWith(getSigningKey()).compact();
     }
 
-
     public boolean isValid(String token) {
         try {
             extractClaims(token);

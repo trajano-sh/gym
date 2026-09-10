@@ -32,8 +32,8 @@ public class AuthService {
 
     @Transactional
     public void register(AuthRegisterRequestDTO dto) {
-        if (userRepository.findByUsername(dto.username())
-                .isPresent()) throw new AlreadyExistsException("Username already exists");
+        if (userRepository.findByUsername(dto.username()).isPresent())
+            throw new AlreadyExistsException("Username already exists");
 
         User user = authMapper.toEntity(dto);
         user.setPassword(passwordEncoder.encode(dto.password()));
@@ -43,8 +43,7 @@ public class AuthService {
     @Transactional
     public TokenResponseDTO login(AuthLoginRequestDTO dto) {
         try {
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(dto.username(), dto.password()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.username(), dto.password()));
 
             String token = tokenProvider.generateToken(authentication);
 

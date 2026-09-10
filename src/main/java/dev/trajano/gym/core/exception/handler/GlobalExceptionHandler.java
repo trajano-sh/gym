@@ -30,9 +30,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {
         return build(HttpStatus.UNAUTHORIZED, "Unauthorized", resolveMessage(ex.getMessage()));
     }
+
     @ExceptionHandler(RequestNotPermitted.class)
-    public ResponseEntity<ErrorResponse> handleRequestNotPermittedException(RequestNotPermitted ex){
-        return build(HttpStatus.TOO_MANY_REQUESTS, "Too Many Requests", resolveMessage("Wait 30 seconds for the next request."));
+    public ResponseEntity<ErrorResponse> handleRequestNotPermittedException(RequestNotPermitted ex) {
+        return build(HttpStatus.TOO_MANY_REQUESTS, "Too Many Requests", resolveMessage("Wait 60 seconds for the next request."));
     }
 
     @ExceptionHandler(NotFoundException.class)

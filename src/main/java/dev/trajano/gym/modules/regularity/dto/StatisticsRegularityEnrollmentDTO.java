@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record StatisticsRegularityEnrollmentDTO(
-        List<EnrollmentResponseDTO> enrollments,
+        List<EnrollmentStatisticsResponseDTO> enrollments,
         LocalDate from,
         LocalDate to
 ) {

@@ -10,6 +10,7 @@ import dev.trajano.gym.modules.enrollment.repository.EnrollmentsRepository;
 import dev.trajano.gym.modules.student.domain.Student;
 import dev.trajano.gym.modules.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EnrollmentsService {
     private final EnrollmentsRepository enrollmentsRepository;
     private final EnrollmentsMapper enrollmentsMapper;
@@ -40,17 +42,19 @@ public class EnrollmentsService {
     public PageResponse<EnrollmentResponseDTO> listEnrollments(Pageable pageable){
         Page<Enrollment> enrollments = enrollmentsRepository.findAll(pageable);
         Page<EnrollmentResponseDTO> enrollmentsResponseDTOS = enrollments.map(enrollmentsMapper::fromEntity);
+        log.info("Listing enrollments");
         return PageResponse.fromPage(enrollmentsResponseDTOS);
     }
 
     @Transactional
     public void deleteEnrollment(Long enrollmentsId) {
         Enrollment enrollments = findById(enrollmentsId);
+        log.info("Deleting enrollment: {}", enrollments.getId());
         enrollmentsRepository.delete(enrollments);
     }
 
     public Enrollment findById(Long enrollmentsId) {
-        Enrollment enrollments = enrollmentsRepository.findById(enrollmentsId).orElseThrow(() -> new NotFoundException("Enrollments Not Found"));
-        return enrollments;
+        log.info("Searching enrollment: {}",enrollmentsId);
+        return enrollmentsRepository.findById(enrollmentsId).orElseThrow(() -> new NotFoundException("Enrollments Not Found"));
     }
 }

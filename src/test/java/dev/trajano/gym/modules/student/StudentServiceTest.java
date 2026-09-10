@@ -1,4 +1,4 @@
-package dev.trajano.gym;
+package dev.trajano.gym.modules.student;
 
 import dev.trajano.gym.modules.student.domain.SexEnum;
 import dev.trajano.gym.modules.student.domain.Student;

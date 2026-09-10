@@ -4,6 +4,7 @@ import dev.trajano.gym.core.utils.PageResponse;
 import dev.trajano.gym.modules.enrollment.dto.EnrollmentRequestDTO;
 import dev.trajano.gym.modules.enrollment.dto.EnrollmentResponseDTO;
 import dev.trajano.gym.modules.enrollment.service.EnrollmentsService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/enrollments")
+@RateLimiter(name = "enrollment")
 public class EnrollmentController {
     private final EnrollmentsService enrollmentsService;
 

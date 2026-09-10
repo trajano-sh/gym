@@ -2,7 +2,7 @@ package dev.trajano.gym.modules.regularity.mapper;
 
 import dev.trajano.gym.modules.enrollment.domain.Enrollment;
 import dev.trajano.gym.modules.regularity.domain.Regularity;
-import dev.trajano.gym.modules.regularity.dto.EnrollmentResponseDTO;
+import dev.trajano.gym.modules.regularity.dto.EnrollmentStatisticsResponseDTO;
 import dev.trajano.gym.modules.regularity.dto.RegularityResponseDTO;
 import dev.trajano.gym.modules.regularity.dto.StatisticsRegularityEnrollmentDTO;
 import org.springframework.stereotype.Component;
@@ -31,11 +31,11 @@ public class RegularityMapper {
 
         AtomicInteger positionCounter = new AtomicInteger(1);
 
-        List<EnrollmentResponseDTO> top10List = frequencyMap.entrySet().stream().sorted(Map.Entry.<Enrollment, Long>comparingByValue().reversed()).limit(10).map(entry -> {
+        List<EnrollmentStatisticsResponseDTO> top10List = frequencyMap.entrySet().stream().sorted(Map.Entry.<Enrollment, Long>comparingByValue().reversed()).limit(10).map(entry -> {
             Enrollment enrollment = entry.getKey();
             Integer totalVisits = entry.getValue().intValue();
 
-            return new EnrollmentResponseDTO(positionCounter.getAndIncrement(), enrollment.getId(), enrollment.getStudentId().getName(), enrollment.getStudentId().getCreatedAt(), totalVisits);
+            return new EnrollmentStatisticsResponseDTO(positionCounter.getAndIncrement(), enrollment.getId(), enrollment.getStudentId().getName(), enrollment.getStudentId().getCreatedAt(), totalVisits);
         }).toList();
 
         return new StatisticsRegularityEnrollmentDTO(top10List, from, to);
