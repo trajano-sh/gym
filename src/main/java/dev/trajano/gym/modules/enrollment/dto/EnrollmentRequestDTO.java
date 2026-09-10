@@ -1,9 +1,11 @@
 package dev.trajano.gym.modules.enrollment.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public record EnrollmentRequestDTO(
-        Long studentId,
-        LocalDate dayMaturity
+        @NotNull Long studentId,
+        @NotNull LocalDate dayMaturity
 ) {
 }

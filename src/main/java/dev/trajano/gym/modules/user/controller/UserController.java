@@ -21,12 +21,12 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserResponseDTO>> listUsers(@PageableDefault Pageable pageable) {
+    public ResponseEntity<Page<UserResponseDTO>> list(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(userService.listUsers(pageable));
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+    public ResponseEntity<Void> delete(@PathVariable Long userId) {
         userService.delete(userId);
         return ResponseEntity.noContent().build();
     }
