@@ -16,22 +16,25 @@ public class PlanController {
     private final PlanService planService;
 
     @GetMapping
-    public ResponseEntity<PageResponse<PlanResponseDTO>> listPlans(Pageable pageable) {
-        return ResponseEntity.ok(planService.listPlans(pageable));
+    public ResponseEntity<PageResponse<PlanResponseDTO>> list(Pageable pageable) {
+        PageResponse<PlanResponseDTO> response = planService.listPlans(pageable);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<PlanResponseDTO> createPlan(@RequestBody PlanRequestDTO requestDTO) {
-        return ResponseEntity.ok(planService.createPlan(requestDTO));
+    public ResponseEntity<PlanResponseDTO> register(@RequestBody PlanRequestDTO request) {
+        PlanResponseDTO response = planService.createPlan(request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{planId}")
-    public ResponseEntity<PlanResponseDTO> searchPlanById(@PathVariable Long planId) {
-        return ResponseEntity.ok(planService.searchPlanById(planId));
+    public ResponseEntity<PlanResponseDTO> findPlanById(@PathVariable Long planId) {
+        PlanResponseDTO response = planService.searchPlanById(planId);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{planId}")
-    public ResponseEntity<Void> deletePlan(@PathVariable Long planId) {
+    public ResponseEntity<Void> delete(@PathVariable Long planId) {
         planService.deletePlan(planId);
         return ResponseEntity.noContent().build();
     }

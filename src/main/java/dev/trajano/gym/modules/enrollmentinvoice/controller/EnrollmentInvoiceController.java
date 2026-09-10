@@ -16,21 +16,21 @@ public class EnrollmentInvoiceController {
     private final EnrollmentInvoiceService enrollmentInvoiceService;
 
     @PostMapping
-    public ResponseEntity<EnrollmentInvoiceResponseDTO> createEnrollmentInvoices(@RequestBody EnrollmentInvoiceRequestDTO requestDTO) {
+    public ResponseEntity<EnrollmentInvoiceResponseDTO> register(@RequestBody EnrollmentInvoiceRequestDTO requestDTO) {
         return ResponseEntity.ok(enrollmentInvoiceService.createEnrollmentInvoices(requestDTO));
     }
 
     @GetMapping("/{enrollmentInvoicesId}")
-    public ResponseEntity<EnrollmentInvoiceResponseDTO> searchEnrollmentInvoicesById(@PathVariable Long enrollmentInvoicesId) {
+    public ResponseEntity<EnrollmentInvoiceResponseDTO> findEnrollmentById(@PathVariable Long enrollmentInvoicesId) {
         return ResponseEntity.ok(enrollmentInvoiceService.searchEnrollmentInvoicesById(enrollmentInvoicesId));
     }
     @GetMapping
-    public ResponseEntity<PageResponse<EnrollmentInvoiceResponseDTO>> listEnrollmentInvoices(Pageable pageable){
+    public ResponseEntity<PageResponse<EnrollmentInvoiceResponseDTO>> list(Pageable pageable){
         return ResponseEntity.ok(enrollmentInvoiceService.listEnrollmentInvoices(pageable));
     }
 
     @DeleteMapping("/{enrollmentInvoicesId}")
-    public ResponseEntity<Void> deleteEnrollmentInvoices(@PathVariable Long enrollmentInvoicesId) {
+    public ResponseEntity<Void> delete(@PathVariable Long enrollmentInvoicesId) {
         enrollmentInvoiceService.deleteEnrollmentInvoices(enrollmentInvoicesId);
         return ResponseEntity.noContent().build();
     }

@@ -16,22 +16,25 @@ public class ModalitiesController {
     private final ModalitiesService modalitiesService;
 
     @PostMapping
-    public ResponseEntity<ModalitiesResponseDTO> createModality(@RequestBody ModalitiesRequestDTO requestDTO) {
-        return ResponseEntity.ok(modalitiesService.createModality(requestDTO));
+    public ResponseEntity<ModalitiesResponseDTO> register(@RequestBody ModalitiesRequestDTO request) {
+        ModalitiesResponseDTO response = modalitiesService.createModality(request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{modalityId}")
-    public ResponseEntity<ModalitiesResponseDTO> searchModalityById(@PathVariable Long modalityId) {
-        return ResponseEntity.ok(modalitiesService.searchModalityById(modalityId));
+    public ResponseEntity<ModalitiesResponseDTO> findModalitiesById(@PathVariable Long modalityId) {
+        ModalitiesResponseDTO response = modalitiesService.searchModalityById(modalityId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<ModalitiesResponseDTO>> listModalities(Pageable pageable) {
-        return ResponseEntity.ok(modalitiesService.listModalities(pageable));
+    public ResponseEntity<PageResponse<ModalitiesResponseDTO>> list(Pageable pageable) {
+        PageResponse<ModalitiesResponseDTO> response = modalitiesService.listModalities(pageable);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{modalityId}")
-    public ResponseEntity<Void> deleteModality(@PathVariable Long modalityId) {
+    public ResponseEntity<Void> delete(@PathVariable Long modalityId) {
         modalitiesService.deleteModalities(modalityId);
         return ResponseEntity.noContent().build();
     }

@@ -16,22 +16,25 @@ public class EnrollmentController {
     private final EnrollmentsService enrollmentsService;
 
     @PostMapping
-    public ResponseEntity<EnrollmentResponseDTO> createEnrollment(@RequestBody EnrollmentRequestDTO requestDTO) {
-        return ResponseEntity.ok(enrollmentsService.createEnrollment(requestDTO));
+    public ResponseEntity<EnrollmentResponseDTO> register(@RequestBody EnrollmentRequestDTO request) {
+        EnrollmentResponseDTO response = enrollmentsService.createEnrollment(request);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{enrollmentsId}")
-    public ResponseEntity<EnrollmentResponseDTO> searchEnrollmentById(@PathVariable Long enrollmentsId) {
-        return ResponseEntity.ok(enrollmentsService.searchEnrollmentById(enrollmentsId));
+    public ResponseEntity<EnrollmentResponseDTO> findEnrollmentById(@PathVariable Long enrollmentsId) {
+        EnrollmentResponseDTO response = enrollmentsService.searchEnrollmentById(enrollmentsId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<PageResponse<EnrollmentResponseDTO>> listEnrollments(Pageable pageable) {
-        return ResponseEntity.ok(enrollmentsService.listEnrollments(pageable));
+    public ResponseEntity<PageResponse<EnrollmentResponseDTO>> list(Pageable pageable) {
+        PageResponse<EnrollmentResponseDTO> response = enrollmentsService.listEnrollments(pageable);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{enrollmentsId}")
-    public ResponseEntity<Void> deleteEnrollment(@PathVariable Long enrollmentsId) {
+    public ResponseEntity<Void> delete(@PathVariable Long enrollmentsId) {
         enrollmentsService.deleteEnrollment(enrollmentsId);
         return ResponseEntity.noContent().build();
     }

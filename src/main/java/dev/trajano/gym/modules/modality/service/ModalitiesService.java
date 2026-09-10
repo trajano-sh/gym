@@ -40,7 +40,7 @@ public class ModalitiesService {
         modalitiesRepository.delete(modalities);
     }
 
-    private Modalities findById(Long modalityId) {
+    public Modalities findById(Long modalityId) {
         Modalities modalities = modalitiesRepository.findById(modalityId).orElseThrow(() -> new NotFoundException("Modality Not Found"));
         return modalities;
     }
