@@ -27,21 +27,21 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponseDTO findUserById(Long userId) {
         User user = findById(userId);
-        log.info("Listing user: {}",userId);
+        log.info("Listing user: {}", userId);
         return userMapper.fromEntity(user);
     }
 
     @Transactional(readOnly = true)
     public Page<UserResponseDTO> listUsers(Pageable pageable) {
         Page<User> users = userRepository.findAll(pageable);
-        log.info("Listing users: {}", users.stream().count()+" Users");
+        log.info("Listing users: {}", users.stream().count() + " Users");
         return users.map(userMapper::fromEntity);
     }
 
     @Transactional
-    public UserResponseDTO update(Long userId, UserRequestDTO request){
+    public UserResponseDTO update(Long userId, UserRequestDTO request) {
         User user = findById(userId);
-        if (passwordEncoder.matches(request.password(), user.getPassword())){
+        if (passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new BusinessException("The password must be different from the previous one.");
         }
         User userUpdate = userMapper.toUpdate(user, request);
@@ -52,12 +52,12 @@ public class UserService {
     @Transactional(readOnly = true)
     public void delete(Long userId) {
         User user = findById(userId);
-        log.info("Deleting user: {}",userId);
+        log.info("Deleting user: {}", userId);
         userRepository.delete(user);
     }
 
     private User findById(Long userId) {
-        log.info("Searching user: {}",userId);
+        log.info("Searching user: {}", userId);
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User Not Found"));
     }
 

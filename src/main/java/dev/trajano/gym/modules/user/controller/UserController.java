@@ -1,5 +1,6 @@
 package dev.trajano.gym.modules.user.controller;
 
+import dev.trajano.gym.modules.user.dto.UserRequestDTO;
 import dev.trajano.gym.modules.user.dto.UserResponseDTO;
 import dev.trajano.gym.modules.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<Page<UserResponseDTO>> list(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(userService.listUsers(pageable));
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserResponseDTO> update(@PathVariable Long userId, @RequestBody UserRequestDTO request) {
+        UserResponseDTO response = userService.update(userId, request);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{userId}")
