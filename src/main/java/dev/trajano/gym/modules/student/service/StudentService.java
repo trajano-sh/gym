@@ -25,12 +25,12 @@ public class StudentService {
     private final StudentMapper studentMapper;
 
     @Transactional
-    public StudentResponseDTO register(StudentRequestDTO requestDTO) {
+    public StudentResponseDTO register(StudentRequestDTO request) {
         log.info("Validating Request");
-        if (requestDTO.email() != null && studentRepository.existsByEmail(requestDTO.email()))
+        if (request.email() != null && studentRepository.existsByEmail(request.email()))
             throw new AlreadyExistsException("E-mail Already Exists");
 
-        Student student = studentMapper.toEntity(requestDTO);
+        Student student = studentMapper.toEntity(request);
         log.info("Saving user: {}",student.getName());
         Student studentSave = studentRepository.save(student);
         return studentMapper.fromEntity(studentSave);
@@ -45,16 +45,16 @@ public class StudentService {
 
 
     @Transactional(readOnly = true)
-    public StudentResponseDTO findStudentsById(Long idStudents) {
-        Student student = findById(idStudents);
+    public StudentResponseDTO findStudentById(Long studentId) {
+        Student student = findById(studentId);
         return studentMapper.fromEntity(student);
     }
 
     @Transactional
-    public StudentResponseDTO update(Long idStudents, StudentRequestDTO requestDTO) {
+    public StudentResponseDTO update(Long idStudents, StudentRequestDTO request) {
         Student student = findById(idStudents);
         log.info("Update student: {}",student.getName());
-        studentMapper.toUpdate(student, requestDTO);
+        studentMapper.toUpdate(student, request);
         log.info("Saving student: {}",student.getName());
         Student studentUpdate = studentRepository.save(student);
         return studentMapper.fromEntity(studentUpdate);

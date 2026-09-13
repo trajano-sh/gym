@@ -2,12 +2,15 @@ package dev.trajano.gym.modules.auth.controller;
 
 import dev.trajano.gym.modules.auth.dto.AuthLoginRequestDTO;
 import dev.trajano.gym.modules.auth.dto.AuthRegisterRequestDTO;
+import dev.trajano.gym.modules.auth.dto.ResetPasswordRequestDTO;
 import dev.trajano.gym.modules.auth.dto.TokenResponseDTO;
 import dev.trajano.gym.modules.auth.service.AuthService;
+import dev.trajano.gym.modules.user.domain.User;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +34,12 @@ public class AuthController {
     public ResponseEntity<TokenResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO request) {
         TokenResponseDTO token = authService.login(request);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/reset")
+    @RateLimiter(name = "authReset")
+    public ResponseEntity<Void> resetPassword(@AuthenticationPrincipal User user, @RequestBody @Valid ResetPasswordRequestDTO request) {
+        authService.resetPassword(user, request);
+        return ResponseEntity.noContent().build();
     }
 }

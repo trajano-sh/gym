@@ -19,8 +19,8 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-    public ResponseEntity<StudentResponseDTO> register(@RequestBody @Valid StudentRequestDTO requestDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.register(requestDTO));
+    public ResponseEntity<StudentResponseDTO> register(@RequestBody @Valid StudentRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.register(request));
     }
 
     @GetMapping
@@ -30,12 +30,12 @@ public class StudentController {
 
     @GetMapping("/{studentsId}")
     public ResponseEntity<StudentResponseDTO> findStudentsById(@PathVariable Long studentsId) {
-        return ResponseEntity.ok(studentService.findStudentsById(studentsId));
+        return ResponseEntity.ok(studentService.findStudentById(studentsId));
     }
 
     @PutMapping("/{studentsId}")
-    public ResponseEntity<StudentResponseDTO> update(@PathVariable Long studentsId, @RequestBody @Valid StudentRequestDTO requestDTO) {
-        return ResponseEntity.ok(studentService.update(studentsId, requestDTO));
+    public ResponseEntity<StudentResponseDTO> update(@PathVariable Long studentsId, @RequestBody @Valid StudentRequestDTO request) {
+        return ResponseEntity.ok(studentService.update(studentsId, request));
     }
 
     @DeleteMapping("/{studentsId}")

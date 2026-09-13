@@ -34,19 +34,12 @@ public class RegularityController {
 
     @GetMapping("/user/{enrollmentId}")
     public ResponseEntity<PageResponse<RegularityResponseDTO>> findRegularityById(@PathVariable Long enrollmentId, Pageable pageable) {
-        PageResponse<RegularityResponseDTO> response = regularityService.listRegularityByEnrollment(enrollmentId,pageable);
+        PageResponse<RegularityResponseDTO> response = regularityService.listRegularityByEnrollment(enrollmentId, pageable);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/top")
-    public ResponseEntity<StatisticsRegularityEnrollmentDTO> listTop20(
-            @RequestParam(name = "from")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate from,
-            @RequestParam(name = "to")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate to
-    ) {
+    public ResponseEntity<StatisticsRegularityEnrollmentDTO> listTop20(@RequestParam(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from, @RequestParam(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         return ResponseEntity.ok(regularityService.listTop10(from, to));
     }
 

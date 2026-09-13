@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GraduationsMapper {
-    public Graduations toEntity(Modalities modalities, GraduationsRequestDTO requestDTO){
+    public Graduations toEntity(Modalities modalities, GraduationsRequestDTO request){
         Graduations graduations = new Graduations();
-        graduations.setName(requestDTO.name());
+        graduations.setName(request.name());
         graduations.setModalityId(modalities);
         return graduations;
     }

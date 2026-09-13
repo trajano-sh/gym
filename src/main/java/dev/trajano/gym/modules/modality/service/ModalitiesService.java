@@ -18,8 +18,8 @@ public class ModalitiesService {
     private final ModalitiesRepository modalitiesRepository;
     private final ModalitiesMapper modalitiesMapper;
 
-    public ModalitiesResponseDTO createModality(ModalitiesRequestDTO dto) {
-        Modalities modality = modalitiesMapper.toEntity(dto);
+    public ModalitiesResponseDTO createModality(ModalitiesRequestDTO request) {
+        Modalities modality = modalitiesMapper.toEntity(request);
         modalitiesRepository.save(modality);
         return modalitiesMapper.fromEntity(modality);
     }

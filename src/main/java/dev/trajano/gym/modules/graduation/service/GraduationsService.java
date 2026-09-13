@@ -21,9 +21,9 @@ public class GraduationsService {
     private final GraduationsRepository graduationsRepository;
     private final ModalitiesService modalitiesService;
 
-    public GraduationsResponseDTO createGraduation(GraduationsRequestDTO requestDTO) {
-        Modalities modalities = modalitiesService.findById(requestDTO.modalityId());
-        Graduations graduations = graduationsMapper.toEntity(modalities, requestDTO);
+    public GraduationsResponseDTO createGraduation(GraduationsRequestDTO request) {
+        Modalities modalities = modalitiesService.findById(request.modalityId());
+        Graduations graduations = graduationsMapper.toEntity(modalities, request);
         graduationsRepository.save(graduations);
         return graduationsMapper.fromEntity(graduations);
     }
@@ -44,8 +44,9 @@ public class GraduationsService {
         graduationsRepository.delete(graduations);
     }
 
-    private Graduations findById(Long graduationId) {
-        Graduations graduations = graduationsRepository.findById(graduationId).orElseThrow(() -> new NotFoundException("Graduations Not Found"));
+    public Graduations findById(Long graduationId) {
+        Graduations graduations = graduationsRepository.findById(graduationId)
+                .orElseThrow(() -> new NotFoundException("Graduations Not Found"));
         return graduations;
     }
 }

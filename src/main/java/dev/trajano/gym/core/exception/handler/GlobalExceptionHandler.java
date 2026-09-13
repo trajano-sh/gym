@@ -1,9 +1,7 @@
 package dev.trajano.gym.core.exception.handler;
 
-import dev.trajano.gym.core.exception.AlreadyExistsException;
-import dev.trajano.gym.core.exception.BusinessException;
-import dev.trajano.gym.core.exception.InvalidTokenException;
-import dev.trajano.gym.core.exception.NotFoundException;
+import dev.trajano.gym.core.exception.*;
+import dev.trajano.gym.modules.auth.dto.ResetPasswordRequestDTO;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +23,19 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException ex) {
         return build(HttpStatus.BAD_REQUEST, "Business Error", resolveMessage(ex.getMessage()));
     }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getField() + ": " + (error.getDefaultMessage() != null ? error.getDefaultMessage() : "Invalid value")).toList();
+        return build(HttpStatus.BAD_REQUEST, "Validation Error", errors);
+    }
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException ex) {
         return build(HttpStatus.UNAUTHORIZED, "Unauthorized", resolveMessage(ex.getMessage()));
+    }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
+        return build(HttpStatus.UNAUTHORIZED, "unauthorized", resolveMessage(ex.getMessage()));
     }
 
     @ExceptionHandler(RequestNotPermitted.class)
@@ -46,11 +53,6 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.CONFLICT, "Conflict", resolveMessage(ex.getMessage()));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getField() + ": " + (error.getDefaultMessage() != null ? error.getDefaultMessage() : "Invalid value")).toList();
-        return build(HttpStatus.BAD_REQUEST, "Validation Error", errors);
-    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {

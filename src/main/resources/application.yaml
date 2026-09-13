@@ -1,4 +1,9 @@
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
   config:
     import: "optional:file:.env[.properties]"
   datasource:
@@ -24,6 +29,10 @@ resilience4j:
         limit-for-period: 5
         limit-refresh-period: 60s
       authLogin:
+        timeout-duration: 0
+        limit-for-period: 5
+        limit-refresh-period: 60s
+      authReset:
         timeout-duration: 0
         limit-for-period: 5
         limit-refresh-period: 60s
